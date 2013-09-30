@@ -1,82 +1,82 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.nflabs</groupId>
-  <artifactId>Grok</artifactId>
-  <version>0.0.3.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
-  <name>Grok</name>
-  <url>http://maven.apache.org</url>
-  
-  <licenses>
-  	<license>
-  	<name>Apache License, Version 2.0</name>
-  	<url>http://www.apache.org/licenses/LICENSE-2.0</url>
-  	<distribution>repo</distribution>
-  	</license>
-  </licenses>
-  
-  <issueManagement>
-  	<system>GitHub</system>
-  	<url>https://github.com/NFLabs/java-grok/issues</url>
-  </issueManagement>
-  
-  <developers>
-  	<developer>
-  		<id>antnonycorbacho</id>
-  		<name>Anthony Corbacho</name>
-  		<email>acorbacho@nflabs.com</email>
-  		<url>https://github.com/anthonycorbacho</url>
-  	</developer>
-  </developers>
+    <groupId>com.nflabs</groupId>
+    <artifactId>Grok</artifactId>
+    <version>0.0.3.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>Grok</name>
+    <url>http://maven.apache.org</url>
 
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
-    <dependency>
-    	<groupId>com.github.tony19</groupId>
-    	<artifactId>named-regexp</artifactId>
-    	<version>0.1.9</version>
-    	<scope>compile</scope>
-    </dependency>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/NFLabs/java-grok/issues</url>
+    </issueManagement>
 
-    <dependency>
-    	<groupId>org.apache.commons</groupId>
-    	<artifactId>commons-lang3</artifactId>
-    	<version>3.1</version>
-    	<scope>compile</scope>
-    </dependency>
+    <developers>
+        <developer>
+            <id>antnonycorbacho</id>
+            <name>Anthony Corbacho</name>
+            <email>acorbacho@nflabs.com</email>
+            <url>https://github.com/anthonycorbacho</url>
+        </developer>
+    </developers>
 
-    <dependency>
-    	<groupId>com.google.code.gson</groupId>
-    	<artifactId>gson</artifactId>
-    	<version>2.2.2</version>
-    	<scope>compile</scope>
-    </dependency>
-  </dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
 
-  <organization>
-  	<name>NFlabs</name>
-  	<url>www.nflabs.com</url>
-  </organization>
- 
-  <description>Grok pattern for java</description>
-  
-  <distributionManagement>
-    <repository>
-        <id>repo</id>
-        <url>https://github.com/NFLabs/mvn-repo/raw/master/releases</url>
-    </repository>
-    <snapshotRepository>
-        <id>snapshot-repo</id>
-        <url>https://github.com/NFLabs/mvn-repo/raw/master/snapshots</url>
-    </snapshotRepository>
- </distributionManagement>
+        <dependency>
+            <groupId>com.github.tony19</groupId>
+            <artifactId>named-regexp</artifactId>
+            <version>0.1.9</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.1</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.2.2</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <organization>
+        <name>NFlabs</name>
+        <url>www.nflabs.com</url>
+    </organization>
+
+    <description>Grok pattern for java</description>
+
+    <distributionManagement>
+        <repository>
+            <id>repo</id>
+            <url>https://github.com/NFLabs/mvn-repo/raw/master/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshot-repo</id>
+            <url>https://github.com/NFLabs/mvn-repo/raw/master/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>
