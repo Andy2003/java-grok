@@ -27,10 +27,8 @@ public class Grok {
             "\\}");
 
     private Map<String, String> patterns;
-    private String savedPattern;
     private Map<String, String> capturedMap;
-
-
+    private String savedPattern;
     private String expandedPattern;
     private Pattern regexp;
     private Discovery disco;
@@ -128,15 +126,15 @@ public class Grok {
      */
     public Match match(String text) {
         if (regexp == null) {
-            return null;
+            throw new IllegalStateException("Pattern is not initialized call compile(String)");
         }
         Matcher m = regexp.matcher(text);
-        Match match = new Match(this);
-        //System.out.println(expanded_pattern);
-        if (m.find()) {
-            match.setSubject(text);
-            match.setMatch(m);
+        if (!m.find()) {
+            return null;
         }
+        Match match = new Match(this);
+        match.setSubject(text);
+        match.setMatch(m);
         return match;
     }
 

@@ -50,9 +50,9 @@ public class Match {
      * @see #getSubject()
      * @see #toJson()
      */
-    public void captures() {
+    public void captures() throws PatternNotFoundException {
         if (match == null) {
-            throw new NullPointerException("match is not initialized");
+            throw new PatternNotFoundException();
         }
         capture = new TreeMap<String, String>();
         for (Entry<String, String> pairs : match.namedGroups().entrySet()) {
