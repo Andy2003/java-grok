@@ -1,6 +1,8 @@
 package com.nflabs.Grok;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 @SuppressWarnings("UnusedDeclaration")
@@ -25,14 +27,15 @@ public class Pile {
     /**
      * @param name of the pattern
      * @param file path
-     * @return the Status
      */
-    public GrokStatus addPattern(String name, String file) {
-        if (name.isEmpty() || file.isEmpty()) {
-            return GrokStatus.UNINITIALIZED;
+    public void addPattern(String name, String file) {
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("name is null or empty");
+        }
+        if (file == null || file.isEmpty()) {
+            throw new IllegalArgumentException("file is null or empty");
         }
         patterns.put(name, file);
-        return GrokStatus.OK;
     }
 
     /**
@@ -40,25 +43,26 @@ public class Pile {
      *
      * @param directory the directory
      */
-    public GrokStatus addFromDirectory(String directory) {
+    public void addFromDirectory(String directory) throws FileNotFoundException {
 
         if (directory == null || directory.isEmpty()) {
             directory = defaultPatternDirectory;
         }
 
         File dir = new File(directory);
+        if (!dir.exists()) {
+            throw new FileNotFoundException(dir.getAbsolutePath());
+        }
         File lst[] = dir.listFiles();
 
         if (lst == null) {
-            return GrokStatus.OK;
+            return;
         }
         for (File aLst : lst) {
             if (aLst.isFile()) {
                 addPatternFromFile(aLst.getAbsolutePath());
             }
         }
-
-        return GrokStatus.OK;
     }
 
 
@@ -66,25 +70,22 @@ public class Pile {
      * Add pattern to grok from a file
      *
      * @param file the file
-     * @return the Status
      */
-    public GrokStatus addPatternFromFile(String file) {
-
+    public void addPatternFromFile(String file) throws FileNotFoundException {
         File f = new File(file);
         if (!f.exists()) {
-            return GrokStatus.FILE_NOT_ACCESSIBLE;
+            throw new FileNotFoundException(f.getAbsolutePath());
         }
         patternFiles.add(file);
-        return GrokStatus.OK;
     }
 
     /**
      * Compile the pattern with a corresponding grok
      *
      * @param pattern the pattern
-     * @throws Throwable
+     * @throws IOException
      */
-    public void compile(String pattern) throws Throwable {
+    public void compile(String pattern) throws IOException {
 
         Grok grok = new Grok();
 

@@ -7,6 +7,7 @@ import java.util.*;
 public class CleanUpHandler {
 
     private Set<String> remove;
+    private Set<String> retain;
     private Map<String, String> rename;
 
     /**
@@ -14,15 +15,8 @@ public class CleanUpHandler {
      *
      * @param key   name
      * @param value name
-     * @see #rename(java.util.Map)
      */
     public void addToRename(String key, String value) {
-        if (key == null || key.isEmpty()) {
-            throw new IllegalArgumentException("key is null or empty");
-        }
-        if (value == null || value.isEmpty()) {
-            throw new IllegalArgumentException("value is null or empty");
-        }
         if (rename == null) {
             rename = new HashMap<String, String>();
         }
@@ -33,12 +27,8 @@ public class CleanUpHandler {
      * Set a field list to remove from the final matched map
      *
      * @param item to remove
-     * @see #remove(java.util.Map)
      */
     public void addToRemove(String item) {
-        if (item == null || item.isEmpty()) {
-            throw new IllegalArgumentException("item is null or empty");
-        }
         if (remove == null) {
             remove = new HashSet<String>();
         }
@@ -47,12 +37,8 @@ public class CleanUpHandler {
 
     /**
      * @param fields the list of strings, to remove from the final match
-     * @see #addToRemove(String)
      */
     public void addToRemove(Collection<String> fields) {
-        if (fields == null) {
-            throw new IllegalArgumentException("fields are null");
-        }
         if (remove == null) {
             remove = new HashSet<String>();
         }
@@ -60,34 +46,62 @@ public class CleanUpHandler {
     }
 
     /**
-     * Remove from the data the unwilling items
-     *
-     * @param data to clean
+     * @param fields the list of strings, to remove from the final match
      */
-    public void remove(Map<String, String> data) {
-        if (remove == null || remove.isEmpty()) {
-            return;
+    public void addToRemove(String... fields) {
+        if (remove == null) {
+            remove = new HashSet<String>();
         }
-        if (data == null || data.isEmpty()) {
-            return;
-        }
-        data.keySet().removeAll(remove);
+        Collections.addAll(remove, fields);
     }
 
     /**
-     * @param data the Map
-     * @see #addToRename(String, Object)
+     * Set a field to retain in the final match
+     *
+     * @param item to remove
      */
-    public void rename(Map<String, String> data) {
-        if (rename == null || rename.isEmpty()) {
-            return;
+    public void addToRetain(String item) {
+        if (retain == null) {
+            retain = new HashSet<String>();
         }
+        retain.add(item);
+    }
+
+    /**
+     * @param fields the list of strings, to retain in the final match
+     */
+    public void addToRetain(Collection<String> fields) {
+        if (retain == null) {
+            retain = new HashSet<String>();
+        }
+        retain.addAll(fields);
+    }
+
+    /**
+     * @param fields the list of strings, to retain in the final match
+     */
+    public void addToRetain(String... fields) {
+        if (retain == null) {
+            retain = new HashSet<String>();
+        }
+        Collections.addAll(retain, fields);
+    }
+
+    public <T> void handle(Map<String, T> data) {
         if (data == null || data.isEmpty()) {
             return;
         }
-        for (Map.Entry<String, String> r : rename.entrySet()) {
-            if (data.containsKey(r.getKey())) {
-                data.put(r.getValue(), data.remove(r.getKey()));
+        if (remove != null) {
+            data.keySet().removeAll(remove);
+        }
+        if (retain != null) {
+            data.keySet().retainAll(retain);
+        }
+        if (rename != null) {
+            for (Map.Entry<String, String> r : rename.entrySet()) {
+                if (data.containsKey(r.getKey())) {
+                    data.put(r.getValue(), data.remove(r.getKey()));
+                }
             }
         }
     }

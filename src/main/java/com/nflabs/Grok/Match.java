@@ -50,9 +50,9 @@ public class Match {
      * @see #getSubject()
      * @see #toJson()
      */
-    public void captures() throws PatternNotFoundException {
+    public void captures() {
         if (match == null) {
-            throw new PatternNotFoundException();
+            throw new IllegalStateException("math is null");
         }
         capture = new TreeMap<String, String>();
         for (Entry<String, String> pairs : match.namedGroups().entrySet()) {
@@ -114,8 +114,7 @@ public class Match {
             throw new IllegalStateException("you need to call captures() first");
         }
         if (cleanUpHandler != null) {
-            cleanUpHandler.rename(capture);
-            cleanUpHandler.remove(capture);
+            cleanUpHandler.handle(capture);
         }
         return capture;
     }
